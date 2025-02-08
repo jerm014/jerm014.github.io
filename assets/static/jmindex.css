@@ -165,5 +165,5 @@
   a:link, a:visited      { color: #fdd73e; font-weight: bold; }
   .fontweightBold        { font-weight: bold; }
   img.float              { float: left; margin-right: 10px; clear: both; }
-  div.nofloat            { float: none; }
+  div.nofloat            { float: none; width: 100% }
 }
