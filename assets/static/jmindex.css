@@ -164,6 +164,6 @@
   .topmenu               { position: sticky; top: 0; z-index: 10; margin-top: 0; background-color: #3262a8; }
   a:link, a:visited      { color: #fdd73e; font-weight: bold; }
   .fontweightBold        { font-weight: bold; }
-  img.float              { float: left; margin-right: 10px; clear: both; width: 600px; object-fit: contain; height: auto; }
+  img.float              { float: left; margin-right: 10px; clear: both; width: 600px; object-fit: contain; height: auto; align-self: flex-start; }
   div.nofloat            { display: flex; }
 }
