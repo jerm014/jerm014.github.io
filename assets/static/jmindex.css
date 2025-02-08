@@ -162,5 +162,5 @@
   .margintop40           { margin-top: 40px; }
   .centerIMG300          { display: block; margin-left: auto; margin-right: auto; width: 300px; }
   .topmenu               { position: sticky; top: 0; z-index: 10; margin-top: 0; background-color: #3262a8; }
-  a:link, a:visited      { color: #f5e6aa; font-weight: bold; }
+  a:link, a:visited      { color: #fdd73e; font-weight: bold; }
 }
