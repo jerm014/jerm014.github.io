@@ -4,6 +4,8 @@
       min-height:100%;
       font-family:Arial,Roboto,sans-serif;
       font-size:16px;
+      --accent-blue: rgb(40, 120, 180);
+      --accent-yellow: rgb(255, 196, 37);
   }
   :where(body.w-body) {
       box-sizing: border-box;
@@ -134,7 +136,7 @@
   }
 }
 @media all{
-  .backgroundcolorPurple { background-color: rgb(40, 120, 180); }
+  .backgroundcolorPurple { background-color: var(--accent-blue); }
   .fontfamilyNimbus      { font-family: Nimbus Mono PS,Courier New,monospace; }
   .fontsize55            { font-size: 55px; }
   .lineheight1point2     { line-height: 1.2; }
@@ -161,8 +163,8 @@
   .backgroundcolorBlack  { background-color: black; }
   .margintop40           { margin-top: 40px; }
   .centerIMG300          { display: block; margin-left: auto; margin-right: auto; width: 300px; }
-  .topmenu               { position: sticky; top: 0; z-index: 10; margin-top: 0; background-color: rgb(40, 120, 180); }
-  a:link, a:visited      { color: #fdd73e; font-weight: bold; }
+  .topmenu               { position: sticky; top: 0; z-index: 10; margin-top: 0; background-color: var(--accent-blue); }
+  a:link, a:visited      { color: var(--accent-yellow); font-weight: bold; }
   .fontweightBold        { font-weight: bold; }
   img.float              { float: left; margin-right: 10px; clear: both; width: 600px; object-fit: contain; height: auto; align-self: flex-start; }
   div.nofloat            { display: flex; }
