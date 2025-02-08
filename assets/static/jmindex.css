@@ -167,3 +167,7 @@
   img.float              { float: left; margin-right: 10px; clear: both; width: 600px; object-fit: contain; height: auto; align-self: flex-start; }
   div.nofloat            { display: flex; }
 }
+
+@media screen and (max-width: 900px) {
+  div.nofloat { flex-direction: column; }
+}
