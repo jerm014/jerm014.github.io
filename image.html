@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Processor</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #F5F5F5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #FAFAFA;
+        }
+        .upload-area:hover {
+            background: #F0F0F0;
+        }
+        .preview-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .preview-box {
+            text-align: center;
+        }
+        .preview-image {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            object-fit: contain;
+            background: #fff;
+        }
+        .download-button {
+            background: #0070F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
+        .download-button:hover {
+            background: #0051CC;
+        }
+        .download-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .hidden {
+            display: none;
+        }
+        #error-message {
+            color: #DC2626;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LinkedIn Profile Image Processor</h1>
+        <div class="upload-area" id="uploadArea">
+            <p>Click or drag and drop your image here</p>
+            <input type="file" id="fileInput" accept="image/*" class="hidden">
+        </div>
+        <div class="preview-container">
+            <div class="preview-box">
+                <h3>Original</h3>
+                <img id="originalPreview" class="preview-image">
+            </div>
+            <div class="preview-box">
+                <h3>Processed</h3>
+                <img id="processedPreview" class="preview-image">
+            </div>
+        </div>
+        <div id="error-message"></div>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <div style="text-align: center;">
+            <a id="downloadLink" download="linkedin-profile.jpg" style="text-decoration: none;">
+                <button id="downloadBtn" class="download-button" disabled>Download Processed Image</button>
+            </a>
+        </div>
+    </div>
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const originalPreview = document.getElementById('originalPreview');
+        const processedPreview = document.getElementById('processedPreview');
+        const canvas = document.getElementById('canvas');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const downloadLink = document.getElementById('downloadLink');
+        const errorMessage = document.getElementById('error-message');
+        function showError(message) {
+            errorMessage.textContent = message;
+            setTimeout(() => {
+                errorMessage.textContent = '';
+            }, 5000);
+        }
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = '#eee';
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.background = '#FAFAFA';
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = '#FAFAFA';
+            if (e.dataTransfer.files.length) {
+                handleImage(e.dataTransfer.files[0]);
+            }
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleImage(e.target.files[0]);
+            }
+        });
+        function handleImage(file) {
+            if (!file.type.startsWith('image/')) {
+                showError('Please upload an image file');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    originalPreview.src = img.src;
+                    processImage(img);
+                };
+                img.onerror = () => {
+                    showError('Error loading image');
+                };
+                img.src = e.target.result;
+            };
+            reader.onerror = () => {
+                showError('Error reading file');
+            };
+            reader.readAsDataURL(file);
+        }
+        function processImage(img) {
+            try {
+                const ctx = canvas.getContext('2d');
+                // Set canvas size to LinkedIn's recommended dimensions
+                const targetSize = 400;
+                canvas.width = targetSize;
+                canvas.height = targetSize;
+                // Calculate scaling to maintain aspect ratio
+                const scale = targetSize / Math.max(img.width, img.height);
+                const scaledWidth = img.width * scale;
+                const scaledHeight = img.height * scale;
+                // Center the image
+                const x = (targetSize - scaledWidth) / 2;
+                const y = (targetSize - scaledHeight) / 2;
+                // Clear canvas with a background color matching the image edges
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, targetSize, targetSize);
+                // Draw original image in center
+                ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
+                // If image is too narrow, add gradient fill on sides
+                if (scaledWidth < targetSize) {
+                    const sideWidth = (targetSize - scaledWidth) / 2;
+                    // Sample colors from the edges of the image
+                    const leftEdgeData = ctx.getImageData(x, y + scaledHeight/2, 1, 1).data;
+                    const rightEdgeData = ctx.getImageData(x + scaledWidth - 1, y + scaledHeight/2, 1, 1).data;
+                    // Create gradients
+                    const leftGradient = ctx.createLinearGradient(0, 0, sideWidth, 0);
+                    leftGradient.addColorStop(0, '#fff');
+                    leftGradient.addColorStop(1, rgba(${leftEdgeData[0]}, ${leftEdgeData[1]}, ${leftEdgeData[2]}, 1));
+                    const rightGradient = ctx.createLinearGradient(x + scaledWidth, 0, targetSize, 0);
+                    rightGradient.addColorStop(0, rgba(${rightEdgeData[0]}, ${rightEdgeData[1]}, ${rightEdgeData[2]}, 1));
+                    rightGradient.addColorStop(1, '#fff');
+                    // Fill sides with gradients
+                    ctx.fillStyle = leftGradient;
+                    ctx.fillRect(0, 0, sideWidth, targetSize);
+                    ctx.fillStyle = rightGradient;
+                    ctx.fillRect(x + scaledWidth, 0, sideWidth, targetSize);
+                }
+                // Update preview and enable download
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
+                processedPreview.src = dataUrl;
+                downloadLink.href = dataUrl;
+                downloadBtn.disabled = false;
+            } catch (error) {
+                showError('Error processing image');
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
