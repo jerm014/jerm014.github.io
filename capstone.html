@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capstone Project - SafeOfMind.com</title>
+    <style>
+        .capstone-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .project-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .project-subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .cover-photo {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin: 0 auto 40px;
+            display: block;
+        }
+
+        .project-description {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .description-text {
+            font-size: 1.1em;
+            color: #34495e;
+            margin-bottom: 25px;
+        }
+
+        .project-highlights {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-highlights li {
+            background: white;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .project-highlights li:hover {
+            transform: translateX(5px);
+        }
+
+        .highlight-title {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .btn-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-github {
+            background: #24292e;
+            color: white;
+        }
+
+        .btn-github:hover {
+            background: #0366d6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(3, 102, 214, 0.4);
+        }
+
+        .tech-stack {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .tech-stack h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2em;
+            }
+            
+            .cover-photo {
+                height: 250px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="capstone-section">
+        <div class="project-header">
+            <h1 class="project-title">SafeOfMind.com</h1>
+            <p class="project-subtitle">AI-Powered Mental Health Crisis Support Platform</p>
+        </div>
+
+        <img src="https://via.placeholder.com/800x400/667eea/ffffff?text=SafeOfMind.com+Screenshot" 
+             alt="SafeOfMind.com Platform Cover Image" 
+             class="cover-photo">
+
+        <div class="project-description">
+            <p class="description-text">
+                SafeOfMind.com is a comprehensive web platform designed to provide immediate, accessible mental health support during crisis situations. Built with a user-centered approach, the platform combines AI-powered guidance with curated local and national mental health resources to create a bridge between individuals in crisis and professional help.
+            </p>
+
+            <ul class="project-highlights">
+                <li>
+                    <div class="highlight-title">AI-Powered Crisis Support</div>
+                    Integrated Anthropic's Claude Haiku foundation model to provide empathetic, real-time mental health guidance through natural language processing.
+                </li>
+                <li>
+                    <div class="highlight-title">Comprehensive Resource Database</div>
+                    Curated and maintains a database of local, state, and national mental health resources including crisis hotlines, counseling services, and emergency contacts.
+                </li>
+                <li>
+                    <div class="highlight-title">Scalable Cloud Architecture</div>
+                    Built on AWS serverless infrastructure using Lambda and Bedrock, achieving 99.9999% uptime with automatic scaling capabilities to handle traffic spikes during crisis periods, reducing response times to under 200ms.
+                </li>
+            </ul>
+        </div>
+
+        <div class="tech-stack">
+            <h3>Technology Stack</h3>
+            <div class="tech-tags">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">AWS Lambda</span>
+                <span class="tech-tag">AWS Bedrock</span>
+                <span class="tech-tag">Anthropic Claude Haiku</span>
+                <span class="tech-tag">HTML/CSS</span>
+                <span class="tech-tag">Python</span>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="#" class="btn btn-demo">🚀 Live Demo</a>
+            <a href="https://github.com/aallm004/CapstoneSU25" class="btn btn-github" target="_blank">View on GitHub</a>
+        </div>
+    </section>
+</body>
+</html>
